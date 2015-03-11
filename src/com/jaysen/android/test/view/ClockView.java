@@ -51,9 +51,10 @@ public class ClockView extends View {
 		canvas.drawColor(getResources().getColor(android.R.color.holo_blue_bright));
 		paint.setAntiAlias(true);
 		paint.setStyle(Style.STROKE);
-		paint.setColor(Color.RED);
+		paint.setStrokeWidth(5);
+		paint.setColor(Color.rgb(60, 0, 84));
 		canvas.translate(canvas.getWidth() / 2, canvas.getWidth() / 2); // 将位置移动画纸的坐标点:150,150
-		canvas.drawCircle(0, 0, canvas.getWidth() / 2, paint); // 画圆圈
+//		canvas.drawCircle(0, 0, canvas.getWidth() / 2, paint); // 画圆圈
 
 		// 使用path绘制路径文字
 		canvas.save();
@@ -62,12 +63,21 @@ public class ClockView extends View {
 		path.addArc(new RectF(0, 0, 150, 150), -180, 180);
 		Paint citePaint = new Paint(paint);
 		citePaint.setTextSize(14);
-		citePaint.setStrokeWidth(1);
+		citePaint.setStrokeWidth(3);
 		canvas.drawTextOnPath("hell word", path, 28, 0, citePaint);
 		canvas.restore();
-
+		//数字
+		canvas.save();
+		canvas.translate(-15, 15);
+		paint.setTextSize(50);
+		for (int i = 0, j = 12; i < 12; i++, j--) {
+			float axes[] = getXY(i,getWidth()/2-60);
+			canvas.drawText(String.valueOf(j), axes[0], axes[1], paint);
+		}
+		canvas.restore();
+		//
 		Paint tmpPaint = new Paint(paint); // 小刻度画笔对象
-		tmpPaint.setStrokeWidth(1);
+		tmpPaint.setStrokeWidth(3);
 		tmpPaint.setTextSize(36);
 		float y = canvas.getWidth() / 2;
 		
@@ -75,9 +85,7 @@ public class ClockView extends View {
 		canvas.rotate(-150);
 		for (int i = 0; i < count; i++) {
 			if (i % 5 == 0) {
-				canvas.drawLine(0f, y, 0, y - 36f, paint);
-				canvas.drawText(String.valueOf(i / 5 + 1), -4f, y - 36f, tmpPaint);
-
+				canvas.drawLine(0f, y, 0, y-50, tmpPaint);
 			} else {
 				canvas.drawLine(0f, y, 0f, y - 20f, tmpPaint);
 			}
@@ -86,12 +94,20 @@ public class ClockView extends View {
 		// 绘制指针
 		canvas.rotate(-30);
 		tmpPaint.setColor(Color.GRAY);
-		tmpPaint.setStrokeWidth(20);
+		tmpPaint.setStrokeWidth(5);
 		canvas.drawCircle(0, 0, 7, tmpPaint);
 		tmpPaint.setStyle(Style.FILL);
 		tmpPaint.setColor(Color.YELLOW);
 		canvas.drawCircle(0, 0, 5, tmpPaint);
-		canvas.drawLine(0, 10, 0, y-100, paint);
+		canvas.drawLine(0, 10, 0, y-100, tmpPaint);
 		super.onDraw(canvas);
+	}
+	
+	private float[] getXY(int index,int R) {
+		float axes[] = new float[2];
+		Double d = Math.PI / 6f * (index + 6);//旋转180度
+		axes[0] = (float) ((R - 20) * Math.sin(d));
+		axes[1] = (float) ((R - 20) * Math.cos(d));
+		return axes;
 	}
 }
