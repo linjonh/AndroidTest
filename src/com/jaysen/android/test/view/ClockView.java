@@ -57,10 +57,18 @@ public class ClockView extends View {
 		// 时钟
 		canvas.drawColor(Color.BLUE);
 		paint.setAntiAlias(true);
+//<<<<<<< HEAD
 		paint.setStyle(Style.FILL);
 		paint.setColor(Color.BLUE);
 		canvas.translate(width / 2, width / 2); // 将位置移动画纸的坐标点:150,150
 		// canvas.drawCircle(0, 0, canvas.getWidth() / 2, paint); // 画圆圈
+//=======
+//		paint.setStyle(Style.STROKE);
+//		paint.setStrokeWidth(5);
+//		paint.setColor(Color.rgb(60, 0, 84));
+//		canvas.translate(canvas.getWidth() / 2, canvas.getWidth() / 2); // 将位置移动画纸的坐标点:150,150
+////		canvas.drawCircle(0, 0, canvas.getWidth() / 2, paint); // 画圆圈
+//>>>>>>> branch 'master' of https://github.com/linjonh/AndroidTest.git
 
 		// 使用path绘制路径文字
 		canvas.save();
@@ -68,15 +76,33 @@ public class ClockView extends View {
 		Path path = new Path();
 		path.addArc(new RectF(0, 0, 150, 150), -180, 180);
 		Paint citePaint = new Paint(paint);
+//<<<<<<< HEAD
 		citePaint.setTextSize(36);
 		citePaint.setStrokeWidth(4);
 		citePaint.setColor(Color.WHITE);
+//=======
+//		citePaint.setTextSize(14);
+//		citePaint.setStrokeWidth(3);
+//>>>>>>> branch 'master' of https://github.com/linjonh/AndroidTest.git
 		canvas.drawTextOnPath("hell word", path, 28, 0, citePaint);
 		canvas.restore();
-
+		//数字
+		canvas.save();
+		canvas.translate(-15, 15);
+		paint.setTextSize(50);
+		for (int i = 0, j = 12; i < 12; i++, j--) {
+			float axes[] = getXY(i,getWidth()/2-60);
+			canvas.drawText(String.valueOf(j), axes[0], axes[1], paint);
+		}
+		canvas.restore();
+		//
 		Paint tmpPaint = new Paint(paint); // 小刻度画笔对象
+//<<<<<<< HEAD
 		tmpPaint.setStrokeWidth(2);
 		tmpPaint.setColor(Color.WHITE);
+//=======
+//		tmpPaint.setStrokeWidth(3);
+//>>>>>>> branch 'master' of https://github.com/linjonh/AndroidTest.git
 		tmpPaint.setTextSize(36);
 
 		float radus = width / 2;
@@ -85,14 +111,19 @@ public class ClockView extends View {
 		canvas.rotate(-150);// 逆时针旋转150，显示正确刻度
 		for (int i = 0; i < count; i++) {
 			if (i % 5 == 0) {
+//<<<<<<< HEAD
 				canvas.drawLine(0f, radus, 0, radus - 36f, citePaint);
 				// canvas.drawText(String.valueOf(i / 5 + 1), -4f, y - 36f,
 				// tmpPaint);
+//=======
+//				canvas.drawLine(0f, radus, 0, radus-50, tmpPaint);
+//>>>>>>> branch 'master' of https://github.com/linjonh/AndroidTest.git
 			} else {
 				canvas.drawLine(0f, radus, 0f, radus - 20f, tmpPaint);
 			}
 			canvas.rotate(360 / count, 0f, 0f); // 旋转画纸
 		}
+//<<<<<<< HEAD
 		long time = System.currentTimeMillis();
 		Calendar calendar = Calendar.getInstance(getResources().getConfiguration().locale);
 		calendar.setTimeInMillis(time);
@@ -100,7 +131,15 @@ public class ClockView extends View {
 		int munite = calendar.get(Calendar.MINUTE);
 		int hour = calendar.get(Calendar.HOUR);
 
+//=======
+//		// 绘制指针
+//		canvas.rotate(-30);
+//		tmpPaint.setColor(Color.GRAY);
+//		tmpPaint.setStrokeWidth(5);
+//		canvas.drawCircle(0, 0, 7, tmpPaint);
+//>>>>>>> branch 'master' of https://github.com/linjonh/AndroidTest.git
 		tmpPaint.setStyle(Style.FILL);
+//<<<<<<< HEAD
 		Paint hPaint = new Paint(tmpPaint);
 		Paint mPaint = new Paint(tmpPaint);
 		Paint sPaint = new Paint(tmpPaint);
@@ -164,6 +203,19 @@ public class ClockView extends View {
 		canvas.drawText(String.valueOf(6), -10, radus - 57, citePaint);
 		canvas.drawText(String.valueOf(12), -18, -(radus - 78), citePaint);
 
+//=======
+//		tmpPaint.setColor(Color.YELLOW);
+//		canvas.drawCircle(0, 0, 5, tmpPaint);
+//		canvas.drawLine(0, 10, 0, radus-100, tmpPaint);
+////>>>>>>> branch 'master' of https://github.com/linjonh/AndroidTest.git
 		super.onDraw(canvas);
+	}
+	
+	private float[] getXY(int index,int R) {
+		float axes[] = new float[2];
+		Double d = Math.PI / 6f * (index + 6);//旋转180度
+		axes[0] = (float) ((R - 20) * Math.sin(d));
+		axes[1] = (float) ((R - 20) * Math.cos(d));
+		return axes;
 	}
 }

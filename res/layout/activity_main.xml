@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:showDividers="middle" >
 
-    <!-- <ImageView
+    <!--
+    <ImageView
         android:id="@+id/img"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/tween_anim_drawable" >
-    </ImageView> -->
+    </ImageView>
+    -->
 
     <com.jaysen.android.test.view.ClockView
         android:id="@+id/clock"
         android:layout_width="500px"
         android:layout_height="500px" />
 
-</LinearLayout>
+<!--     <com.jaysen.android.test.view.CircleClok
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+ -->
+    <!-- <TextView
+        android:id="@+id/textView2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:text="Large Text1234567890asdhalksfhalsgkhasl"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:text="Large Text1234567890asdhalksfhalsgkhasl"
+        android:textAppearance="?android:attr/textAppearanceLarge" /> -->
+
+</FrameLayout>
