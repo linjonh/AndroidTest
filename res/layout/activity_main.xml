@@ -12,7 +12,8 @@
     </ImageView> -->
 
     <com.jaysen.android.test.view.ClockView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/clock"
+        android:layout_width="500px"
+        android:layout_height="500px" />
 
 </LinearLayout>
